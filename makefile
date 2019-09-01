@@ -1,7 +1,7 @@
 include ${PETSC_DIR}/lib/petsc/conf/variables
 include ${PETSC_DIR}/lib/petsc/conf/rules
 
-dnlo: dnlo.o  chkopts
+dnlo: dnlo.o
 	-${CLINKER} -o dnlo dnlo.o  ${PETSC_LIB}
 	${RM} dnlo.o
 
