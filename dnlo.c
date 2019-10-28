@@ -308,7 +308,7 @@ PetscErrorCode FormBounds(SNES snes, Vec Xl, Vec Xu) {
     double        **aXl, dx, dy, x, y, xymin[2], xymax[2];
     ierr = SNESGetDM(snes,&da);CHKERRQ(ierr);
     ierr = DMDAGetLocalInfo(da,&info); CHKERRQ(ierr);
-    ierr = DMDAGetBoundingBox(info.da,xymin,xymax); CHKERRQ(ierr);
+    ierr = DMGetBoundingBox(info.da,xymin,xymax); CHKERRQ(ierr);
     dx = (xymax[0] - xymin[0]) / (info.mx - 1);
     dy = (xymax[1] - xymin[1]) / (info.my - 1);
     ierr = SNESGetApplicationContext(snes,&user); CHKERRQ(ierr);
@@ -331,7 +331,7 @@ PetscErrorCode FormField(DM da, double (*f)(double,double), Vec v) {
     int           i, j;
     double        **av, dx, dy, x, y, xymin[2], xymax[2];
     ierr = DMDAGetLocalInfo(da,&info); CHKERRQ(ierr);
-    ierr = DMDAGetBoundingBox(da,xymin,xymax); CHKERRQ(ierr);
+    ierr = DMGetBoundingBox(da,xymin,xymax); CHKERRQ(ierr);
     dx = (xymax[0] - xymin[0]) / (info.mx - 1);
     dy = (xymax[1] - xymin[1]) / (info.my - 1);
     ierr = DMDAVecGetArray(da, v, &av);CHKERRQ(ierr);
@@ -519,7 +519,7 @@ PetscErrorCode FormFunctionLocal(DMDALocalInfo *info, double **auin,
   Vec             Qquad[4], ucopy;
 
   PetscFunctionBeginUser;
-  ierr = DMDAGetBoundingBox(info->da,xymin,xymax); CHKERRQ(ierr);
+  ierr = DMGetBoundingBox(info->da,xymin,xymax); CHKERRQ(ierr);
   dx = (xymax[0] - xymin[0]) / (info->mx - 1);
   dy = (xymax[1] - xymin[1]) / (info->my - 1);
   ierr = fluxcoeffs(dx,dy,coeff); CHKERRQ(ierr);

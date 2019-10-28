@@ -174,7 +174,7 @@ PetscErrorCode DomeThicknessLocal(DMDALocalInfo *info, double **aH, IceCtx *user
     double       xymin[2], xymax[2], dx, dy, x, y, xc, yc, r, s, tmp;
     int          j, k;
     PetscFunctionBeginUser;
-    ierr = DMDAGetBoundingBox(info->da,xymin,xymax); CHKERRQ(ierr);
+    ierr = DMGetBoundingBox(info->da,xymin,xymax); CHKERRQ(ierr);
     dx = (xymax[0] - xymin[0]) / (info->mx - 1);
     dy = (xymax[1] - xymin[1]) / (info->my - 1);
     for (k=info->ys; k<info->ys+info->ym; k++) {
